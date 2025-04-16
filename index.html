@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Major Examination</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #fff;
+      color: black;
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 64px;
+      color: black; /* Simple black color */
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+      margin-bottom: 60px;
+      animation: pulse 2s infinite;
+    }
+
+    .block {
+      width: 90%;
+      margin: 0 auto 40px auto;
+      padding: 25px 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 10px 20px rgba(255,255,255,0.1);
+      font-family: 'Dancing Script', cursive;
+      transform: perspective(600px) rotateX(2deg);
+      transition: transform 0.4s ease, background 0.4s ease;
+      position: relative;
+      background: white; /* Simple white background */
+    }
+
+    .block:hover {
+      transform: scale(1.05) perspective(600px) rotateX(0deg);
+      background-color: #f3f4f6;
+    }
+
+    .title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      color: black; /* Simple black color */
+      margin-bottom: 12px;
+    }
+
+    .info {
+      font-size: 22px;
+      color: black; /* Simple black color */
+    }
+
+    .countdown {
+      font-size: 50px; /* Larger countdown font */
+      font-weight: bold;
+      margin-top: 8px;
+      color: black; /* Simple black color */
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .quote {
+      font-family: 'Dancing Script', cursive;
+      font-size: 48px;
+      text-align: center;
+      margin-top: 80px;
+      color: black; /* Simple black color */
+      text-shadow: 2px 2px 8px #000;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .goodluck {
+      font-family: 'Dancing Script', cursive;
+      font-size: 56px;
+      text-align: center;
+      color: #34d399; /* Green color for 'Good Luck' */
+      margin-top: 20px;
+      text-shadow: 0 0 10px #22c55e;
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .title { font-size: 36px; }
+      .info, .countdown { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌟 Major Examination 🌟</h1>
+
+  <!-- Audio Background -->
+  <audio autoplay loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="block">
+    <div class="title">Mathematical Programming (MTL508)</div>
+    <div class="info">📅 May 1, 2025 | 🕥 10:30 AM – 12:30 PM</div>
+    <div class="countdown" id="countdown1"></div>
+  </div>
+
+  <div class="block">
+    <div class="title">Numerical Analysis (MTL509)</div>
+    <div class="info">📅 May 2, 2025 | 🕕 6:00 PM – 8:00 PM</div>
+    <div class="countdown" id="countdown2"></div>
+  </div>
+
+  <div class="block">
+    <div class="title">Complex Analysis (MTL506)</div>
+    <div class="info">📅 May 3, 2025 | 🕥 10:30 AM – 12:30 PM</div>
+    <div class="countdown" id="countdown3"></div>
+  </div>
+
+  <div class="block">
+    <div class="title">MTL768</div>
+    <div class="info">📅 May 3, 2025 | 🕞 3:30 PM – 5:30 PM</div>
+    <div class="countdown" id="countdown4"></div>
+  </div>
+
+  <div class="block">
+    <div class="title">Measure Theory (MTL510)</div>
+    <div class="info">📅 May 5, 2025 | 🕗 8:00 AM – 10:00 AM</div>
+    <div class="countdown" id="countdown5"></div>
+  </div>
+
+  <div class="block">
+    <div class="title">Topology (MTL507)</div>
+    <div class="info">📅 May 7, 2025 | 🕥 10:30 AM – 12:30 PM</div>
+    <div class="countdown" id="countdown6"></div>
+  </div>
+
+  <div class="quote">"Discipline will take you places motivation can't."</div>
+  <div class="goodluck">Good Luck — You Got This! 💪</div>
+
+  <script>
+    const exams = [
+      { id: 'countdown1', date: '2025-05-01' },
+      { id: 'countdown2', date: '2025-05-02' },
+      { id: 'countdown3', date: '2025-05-03' },
+      { id: 'countdown4', date: '2025-05-03' },
+      { id: 'countdown5', date: '2025-05-05' },
+      { id: 'countdown6', date: '2025-05-07' }
+    ];
+
+    exams.forEach(exam => {
+      const now = new Date();
+      const examDate = new Date(exam.date);
+      const diff = Math.ceil((examDate - now) / (1000 * 60 * 60 * 24));
+      const display = diff >= 0 ? `${diff} day(s) left` : 'Exam Passed';
+      document.getElementById(exam.id).textContent = display;
+    });
+  </script>
+</body>
+</html>
